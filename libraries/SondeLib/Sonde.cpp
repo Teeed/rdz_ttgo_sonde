@@ -35,7 +35,7 @@ int getKeyPressEvent(); /* in RX_FSK.ino */
  */   
 int initlevels[40];
 
-Sonde::Sonde() {
+Sonde::Sonde() : myIP("0.0.0.0") {
 	for (int i = 0; i < 39; i++) {
 		initlevels[i] = gpio_get_level((gpio_num_t)i);
   	}
@@ -243,6 +243,7 @@ void Sonde::clearIP() {
 
 void Sonde::setIP(const char *ip, bool AP) {
 	disp.setIP(ip, AP);
+	strncpy(myIP, ip, sizeof(myIP));
 }
 
 void Sonde::clearSonde() {
